@@ -99,9 +99,13 @@
         function pruefungBestanden() {
             // Eingabe der Noten
             var ap1 = parseFloat(document.getElementById('ap1').value);
+            ap1 = isNaN(ap1)?0:ap1;
             var ap2_1 = parseFloat(document.getElementById('ap2_1').value);
+            ap2_1 = isNaN(ap2_1)?0:ap2_1;
             var ap2_2 = parseFloat(document.getElementById('ap2_2').value);
+            ap2_2 = isNaN(ap2_2)?0:ap2_2;
             var ap2_wiso = parseFloat(document.getElementById('ap2_wiso').value);
+            ap2_wiso = isNaN(ap2_wiso)?0:ap2_wiso;
             var ap2_projektarbeit = parseFloat(document.getElementById('ap2_projektarbeit').value);
             var erg_pruefung = parseFloat(document.getElementById('erg_pruefung').value);
             var selectedNote = document.getElementById('selected_note').value;
@@ -163,7 +167,6 @@
 
             // Berechnung der Gesamtnote
             var gesamtNote = (ap1_note * 20 + ap2_1_note * 10 + ap2_2_note * 10 + ap2_wiso_note * 10 + ap2_projektarbeit * 50)/100;
-            console.log(gesamtNote);
             var gesamtNoteAp2 = (ap2_1_note * 10 + ap2_2_note * 10 + ap2_wiso_note * 10 + ap2_projektarbeit * 50) / 80;
             // Überprüfung der Bedingungen
 
