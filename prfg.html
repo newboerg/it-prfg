@@ -162,11 +162,12 @@
             }
 
             // Berechnung der Gesamtnote
-            var gesamtNote = (ap1_note * 0.2 + ap2_1_note * 0.1 + ap2_2_note * 0.1 + ap2_wiso_note * 0.1 + ap2_projektarbeit * 0.5);
-            var gesamtNoteAp2 = (ap2_1_note * 0.1 + ap2_2_note * 0.1 + ap2_wiso_note * 0.1 + ap2_projektarbeit * 0.5) / 0.8;
+            var gesamtNote = (ap1_note * 20 + ap2_1_note * 10 + ap2_2_note * 10 + ap2_wiso_note * 10 + ap2_projektarbeit * 50)/100;
+            console.log(gesamtNote);
+            var gesamtNoteAp2 = (ap2_1_note * 10 + ap2_2_note * 10 + ap2_wiso_note * 10 + ap2_projektarbeit * 50) / 80;
             // Überprüfung der Bedingungen
 
-            if (gesamtNote < 49.5) {
+            if (gesamtNote < 49.5 || gesamtNote == NaN) {
                 nichtBestandenBegruendung.push('Gesamtnote zu niedrig');
             }
             if (gesamtNoteAp2 < 49.5) {
@@ -235,7 +236,7 @@
             };
         </script>
         <label for="ap2_projektarbeit">AP2-PROJEKTARBEIT (50%):</label>
-        <input type="number" id="ap2_projektarbeit" disabled><br>
+        <input type="number" id="ap2_projektarbeit" value="0" disabled><br>
     </div>
     <div id="div_erg_pruefung" style="display: none;">
         <label for="erg_pruefung">Ergänzungsprüfung:</label>
