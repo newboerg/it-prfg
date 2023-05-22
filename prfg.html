@@ -73,6 +73,13 @@
         h2 {
             text-align: center;
         }
+
+        @media (orientation:portrait) {
+            h2,.weg {
+                display: none;
+                visibility: none;
+            }
+        }
     </style>
 
     <title>Prüfungsergebnis</title>
@@ -145,7 +152,7 @@
                 nichtBestandenBegruendung.push('Ungenügend in Projektarbeit');
             }
             if (ap2_1_note < 49.5 && ap2_2_note < 49.5 || ap2_1_note < 49.5 && ap2_wiso_note < 49.5 || ap2_2_note < 49.5 && ap2_wiso_note < 49.5) {
-                nichtBestandenBegruendung.push('Zu viele Mangelhafte Leistungen in AP2');
+                nichtBestandenBegruendung.push('Zu viele \"Mangelhaft\" in AP2');
             }
 
             if (nichtBestandenBegruendung.length > 0) {
@@ -161,7 +168,7 @@
 </head>
 
 <body>
-    <h1>Prüfungsergebnis IT-Berufe</h1>
+    <h1>Prüfungsergebnis <span class="weg">IT-Berufe</span> </h1>
     <h2>-Verordnung 2020-</h2>
     Alle Angaben ohne Gewähr
 
