@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #div_erg_pruefung , #Praktische_Pruefung{
+            margin-top: 10px;
+            background-color: #f9f9f9;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        #ergebnis {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        #endpunktzahl {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        #ap2_projektarbeit {
+            background-color: #eee;
+        }
+
+    </style> 
+
+    <title>Prüfungsergebnis</title>
+    <script>
+        function pruefungBestanden() {
+            // Eingabe der Noten
+            var ap1 = parseFloat(document.getElementById('ap1').value);
+            var ap2_1 = parseFloat(document.getElementById('ap2_1').value);
+            var ap2_2 = parseFloat(document.getElementById('ap2_2').value);
+            var ap2_wiso = parseFloat(document.getElementById('ap2_wiso').value);
+            var ap2_projektarbeit = parseFloat(document.getElementById('ap2_projektarbeit').value);
+            var erg_pruefung = parseFloat(document.getElementById('erg_pruefung').value);
+            var selectedNote = document.getElementById('selected_note').value;
+            var nichtBestandenBegruendung = [];
+
+            // Überprüfung der Ergänzungsprüfung
+            var ergPruefungVisible = false;
+
+            if ((ap2_1 < 50 || ap2_2 < 50 || ap2_wiso < 50)) {
+                document.getElementById('div_erg_pruefung').style.display = 'block';
+                ergPruefungVisible = true;
+            } else {
+                document.getElementById('div_erg_pruefung').style.display = 'none';
+                document.getElementById('div_erg_pruefung').value = '';
+            }
+
+            // Berechnung der Noten
+            var ap1_note = ap1;
+            var ap2_1_note = ap2_1;
+            var ap2_2_note = ap2_2;
+            var ap2_wiso_note = ap2_wiso;
+
+            if (ergPruefungVisible && selectedNote !== 'none') {
+                if (erg_pruefung) {
+                    if (selectedNote === 'ap2_1') {
+                        ap2_1_note = (2 * ap2_1 + erg_pruefung) / 3;
+                        document.getElementById('EP').innerHTML = ap2_1_note;
+                    } else if (selectedNote === 'ap2_2') {
+                        ap2_2_note = (2 * ap2_2 + erg_pruefung) / 3;
+                        document.getElementById('EP').innerHTML = ap2_2_note;
+                    } else if (selectedNote === 'ap2_wiso') {
+                        ap2_wiso_note = (2 * ap2_wiso + erg_pruefung) / 3;
+                        document.getElementById('EP').innerHTML = ap2_wiso_note;
+                    }
+                }
+            }
+
+            // Berechnung der Gesamtnote
+            var gesamtNote = (ap1_note * 0.2 + ap2_1_note * 0.1 + ap2_2_note * 0.1 + ap2_wiso_note * 0.1 + ap2_projektarbeit * 0.5);
+            var gesamtNoteAp2 = (ap2_1_note * 0.1 + ap2_2_note * 0.1 + ap2_wiso_note * 0.1 + ap2_projektarbeit * 0.5) / 0.8;
+            // Überprüfung der Bedingungen
+
+            if (gesamtNote < 49.5) {
+                nichtBestandenBegruendung.push('Gesamtnote zu niedrig');
+            }
+            if (gesamtNoteAp2 < 49.5) {
+                nichtBestandenBegruendung.push('Summe der AP2-Noten zu niedrig [' + String(gesamtNoteAp2) + '%]');
+            }
+
+            if (ap2_1_note < 19.5) {
+                nichtBestandenBegruendung.push('Ungenügend in AP2-1');
+            }
+            if (ap2_2_note < 19.5) {
+                nichtBestandenBegruendung.push('Ungenügend in AP2-2');
+            }
+            if (ap2_wiso_note < 19.5) {
+                nichtBestandenBegruendung.push('Ungenügend in AP2-Wiso');
+            }
+            if (ap2_projektarbeit < 19.5) {
+                nichtBestandenBegruendung.push('Ungenügend in Projektarbeit');
+            }
+            if (ap2_1_note < 49.5 && ap2_2_note < 49.5 || ap2_1_note < 49.5 && ap2_wiso_note < 49.5 || ap2_2_note < 49.5 && ap2_wiso_note < 49.5) {
+                nichtBestandenBegruendung.push('Zu viele Mangelhafte Leistungen in AP2');
+            }
+
+            if (nichtBestandenBegruendung.length > 0) {
+                var begruendungText = 'Prüfung nicht bestanden. Begründung(en):<br>' + nichtBestandenBegruendung.join('<br>');
+                document.getElementById('ergebnis').innerHTML = begruendungText;
+            } else {
+                document.getElementById('ergebnis').innerHTML = 'Prüfung bestanden!';
+            }
+
+            document.getElementById('endpunktzahl').innerHTML = 'Endpunktzahl: ' + (isNaN(gesamtNote) ? 0 : gesamtNote.toFixed(2));
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Prüfungsergebnis IT Berufe Verordnung 2020</h1>
+    Alle Angaben ohne Gewähr
+
+    <label for="ap1">AP1 (20%):</label>
+    <input type="number" id="ap1"><br>
+
+    <label for="ap2_1">AP2-1 (10%):</label>
+    <input type="number" id="ap2_1"><br>
+
+    <label for="ap2_2">AP2-2 (10%):</label>
+    <input type="number" id="ap2_2"><br>
+
+    <label for="ap2_wiso">AP2-WISO (10%):</label>
+    <input type="number" id="ap2_wiso"><br>
+    <div id="Praktische_Pruefung">
+        <label for="ap2_projektdoku">Dokumentation:</label>
+        <input type="number" id="ap2_projektdoku"><br>
+        <label for="ap2_projektpraesentation">Präsentation / Fachgespräch:</label>
+        <input type="number" id="ap2_projektpraesentation"><br>
+        <script>
+            document.getElementById("ap2_projektdoku").oninput = function () {
+                document.getElementById("ap2_projektarbeit").value = (parseInt(document.getElementById("ap2_projektdoku").value) + parseInt(document.getElementById("ap2_projektpraesentation").value)) / 2;
+            };
+            document.getElementById("ap2_projektpraesentation").oninput = function () {
+                document.getElementById("ap2_projektarbeit").value = (parseInt(document.getElementById("ap2_projektdoku").value) + parseInt(document.getElementById("ap2_projektpraesentation").value)) / 2;
+            };
+        </script>
+        <label for="ap2_projektarbeit">AP2-PROJEKTARBEIT (50%):</label>
+        <input type="number" id="ap2_projektarbeit" readonly><br>
+    </div>
+    <div id="div_erg_pruefung" style="display: none;">
+        <label for="erg_pruefung">Ergänzungsprüfung:</label>
+        <input type="number" id="erg_pruefung"><br>
+
+        <label for="selected_note">Ergänzungsprüfung für:</label>
+        <select id="selected_note">
+            <option value="none">Keine Auswahl</option>
+            <option value="ap2_1">AP2-1</option>
+            <option value="ap2_2">AP2-2</option>
+            <option value="ap2_wiso">AP2-WISO</option>
+        </select>
+        neue Punktzahl: <span id="EP"></span>
+    </div>
+
+
+    <button onclick="pruefungBestanden()">Ergebnis anzeigen</button>
+
+    <p id="ergebnis"></p>
+    <p id="endpunktzahl"></p>
+</body>
+
+</html>
