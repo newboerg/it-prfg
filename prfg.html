@@ -177,16 +177,16 @@
                 nichtBestandenBegruendung.push('Summe der AP2-Noten zu niedrig [' + String(gesamtNoteAp2) + '%]');
             }
 
-            if (ap2_1_note < 19.5) {
+            if (ap2_1_note < 29.5) {
                 nichtBestandenBegruendung.push('Ungenügend in AP2-1');
             }
-            if (ap2_2_note < 19.5) {
+            if (ap2_2_note < 29.5) {
                 nichtBestandenBegruendung.push('Ungenügend in AP2-2');
             }
-            if (ap2_wiso_note < 19.5) {
+            if (ap2_wiso_note < 29.5) {
                 nichtBestandenBegruendung.push('Ungenügend in AP2-Wiso');
             }
-            if (ap2_projektarbeit < 19.5) {
+            if (ap2_projektarbeit < 29.5) {
                 nichtBestandenBegruendung.push('Ungenügend in Projektarbeit');
             }
             if (ap2_1_note < 49.5 && ap2_2_note < 49.5 || ap2_1_note < 49.5 && ap2_wiso_note < 49.5 || ap2_2_note < 49.5 && ap2_wiso_note < 49.5) {
@@ -239,7 +239,7 @@
                 document.getElementById("ap2_projektarbeit").value = (parseInt(document.getElementById("ap2_projektdoku").value) + parseInt(document.getElementById("ap2_projektpraesentation").value)) / 2;
             };
         </script>
-        <label for="ap2_projektarbeit">AP2-PROJEKTARBEIT (50%):</label>
+        <label for="ap2_projektarbeit">AP2-Projektarbeit (50%):</label>
         <input type="number" id="ap2_projektarbeit" value="0" disabled><br>
     </div>
     <div id="div_erg_pruefung" style="display: none;">
