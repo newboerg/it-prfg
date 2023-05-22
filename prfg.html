@@ -59,6 +59,8 @@
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
+            display: none;
+            visibility: hidden;
         }
 
         #endpunktzahl {
@@ -74,11 +76,18 @@
             text-align: center;
         }
 
+        .klein {
+            font-size: xx-small;
+        }
+
         @media (orientation:portrait) {
-            h2,.weg {
+
+            h2,
+            .weg {
                 display: none;
                 visibility: none;
             }
+
         }
     </style>
 
@@ -163,6 +172,9 @@
             }
 
             document.getElementById('endpunktzahl').innerHTML = 'Endpunktzahl: ' + (isNaN(gesamtNote) ? 0 : gesamtNote.toFixed(2));
+            document.getElementById('ergebnis').style.display = 'block';
+            document.getElementById('ergebnis').style.visibility = 'visible';
+
         }
     </script>
 </head>
@@ -170,7 +182,7 @@
 <body>
     <h1>Prüfungsergebnis <span class="weg">IT-Berufe</span> </h1>
     <h2>-Verordnung 2020-</h2>
-    Alle Angaben ohne Gewähr
+    
 
     <label for="ap1">AP1 (20%):</label>
     <input type="number" id="ap1" onfocus="this.select();" value="0" min="0" max="100"><br>
@@ -228,6 +240,7 @@
             }
         });
     </script>
+    <span class="klein">Alle Angaben ohne Gewähr</span>
 </body>
 
 </html>
