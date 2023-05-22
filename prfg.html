@@ -161,21 +161,21 @@
     Alle Angaben ohne Gewähr
 
     <label for="ap1">AP1 (20%):</label>
-    <input type="number" id="ap1"><br>
+    <input type="number" id="ap1" onClick="this.select();" value="0" min="0" max="100"><br>
 
     <label for="ap2_1">AP2-1 (10%):</label>
-    <input type="number" id="ap2_1"><br>
+    <input type="number" id="ap2_1" onClick="this.select();" value="0" min="0" max="100"><br>
 
     <label for="ap2_2">AP2-2 (10%):</label>
-    <input type="number" id="ap2_2"><br>
+    <input type="number" id="ap2_2" onClick="this.select();" value="0" min="0" max="100"><br>
 
     <label for="ap2_wiso">AP2-WISO (10%):</label>
-    <input type="number" id="ap2_wiso"><br>
+    <input type="number" id="ap2_wiso" onClick="this.select();" value="0" min="0" max="100"><br>
     <div id="Praktische_Pruefung">
         <label for="ap2_projektdoku">Dokumentation:</label>
-        <input type="number" id="ap2_projektdoku"><br>
+        <input type="number" id="ap2_projektdoku" onClick="this.select();" value="0" min="0" max="100"><br>
         <label for="ap2_projektpraesentation">Präsentation / Fachgespräch:</label>
-        <input type="number" id="ap2_projektpraesentation"><br>
+        <input type="number" id="ap2_projektpraesentation" onClick="this.select();" value="0" min="0" max="100"><br>
         <script>
             document.getElementById("ap2_projektdoku").oninput = function () {
                 document.getElementById("ap2_projektarbeit").value = (parseInt(document.getElementById("ap2_projektdoku").value) + parseInt(document.getElementById("ap2_projektpraesentation").value)) / 2;
@@ -185,7 +185,7 @@
             };
         </script>
         <label for="ap2_projektarbeit">AP2-PROJEKTARBEIT (50%):</label>
-        <input type="number" id="ap2_projektarbeit" readonly><br>
+        <input type="number" id="ap2_projektarbeit" disabled><br>
     </div>
     <div id="div_erg_pruefung" style="display: none;">
         <label for="erg_pruefung">Ergänzungsprüfung:</label>
