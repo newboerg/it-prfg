@@ -45,7 +45,8 @@
             background-color: #45a049;
         }
 
-        #div_erg_pruefung , #Praktische_Pruefung{
+        #div_erg_pruefung,
+        #Praktische_Pruefung {
             margin-top: 10px;
             background-color: #f9f9f9;
             padding: 10px;
@@ -68,10 +69,11 @@
         #ap2_projektarbeit {
             background-color: #eee;
         }
-        h2{
+
+        h2 {
             text-align: center;
         }
-    </style> 
+    </style>
 
     <title>Prüfungsergebnis</title>
     <script>
@@ -178,7 +180,8 @@
         <label for="ap2_projektdoku">Dokumentation:</label>
         <input type="number" id="ap2_projektdoku" onfocus="this.select();" value="0" min="0" max="100"><br>
         <label for="ap2_projektpraesentation">Präsentation / Fachgespräch:</label>
-        <input type="number" id="ap2_projektpraesentation" onfocus="this.select();" value="0" min="0" max="100"><br>
+        <input type="number" id="ap2_projektpraesentation" onfocus="this.select();" value="0" min="0" max="100"
+            enterkeyhint="done" /><br>
         <script>
             document.getElementById("ap2_projektdoku").oninput = function () {
                 document.getElementById("ap2_projektarbeit").value = (parseInt(document.getElementById("ap2_projektdoku").value) + parseInt(document.getElementById("ap2_projektpraesentation").value)) / 2;
@@ -209,6 +212,15 @@
 
     <p id="ergebnis"></p>
     <p id="endpunktzahl"></p>
+
+    <script>
+        document.getElementById("ap2_projektpraesentation").addEventListener("keypress", function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                pruefungBestanden();
+            }
+        });
+    </script>
 </body>
 
 </html>
