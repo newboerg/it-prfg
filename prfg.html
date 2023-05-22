@@ -107,9 +107,31 @@
             // Überprüfung der Ergänzungsprüfung
             var ergPruefungVisible = false;
 
-            if ((ap2_1 < 50 || ap2_2 < 50 || ap2_wiso < 50)) {
-                document.getElementById('div_erg_pruefung').style.display = 'block';
-                ergPruefungVisible = true;
+            if ((ap2_1 < 49.5 || ap2_2 < 49.5 || ap2_wiso < 49.5)) {
+                var auswahlfeld = document.getElementById('selected_note');
+                auswahlfeld.length = 0;
+                if (ap2_1 < 49.5) {
+                    var neu = document.createElement("option");
+                    neu.value = "ap2_1";
+                    neu.text = "AP2-1";
+                    auswahlfeld.add(neu);
+                }
+                if (ap2_2 < 49.5) {
+                    var neu = document.createElement("option");
+                    neu.value = "ap2_2";
+                    neu.text = "AP2-2";
+                    auswahlfeld.add(neu);
+                }
+                if (ap2_wiso < 49.5) {
+                    var neu = document.createElement("option");
+                    neu.value = "ap2_wiso";
+                    neu.text = "AP2-WISO";
+                    auswahlfeld.add(neu);
+                }
+                if (auswahlfeld.length <=2){
+                    document.getElementById('div_erg_pruefung').style.display = 'block';
+                    ergPruefungVisible = true;
+                }
             } else {
                 document.getElementById('div_erg_pruefung').style.display = 'none';
                 document.getElementById('div_erg_pruefung').value = '';
@@ -182,7 +204,7 @@
 <body>
     <h1>Prüfungsergebnis <span class="weg">IT-Berufe</span> </h1>
     <h2>-Verordnung 2020-</h2>
-    
+
 
     <label for="ap1">AP1 (20%):</label>
     <input type="number" id="ap1" onfocus="this.select();" value="0" min="0" max="100"><br>
